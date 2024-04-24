@@ -1,0 +1,16 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "GetProducts";
+    Layout = "_Layout";
+}
+
+<div class="btn-group">
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Ana Sayfaya Dön</a>
+    <a class="btn btn-outline-info" asp-action="Index" asp-controller="Product">Ürün Sayfasına Geri Dön</a>
+</div>
+
+<h5>@Model.ProductName</h5>
+<p>@Model.ProductDescription</p>
+<h4>@Model.ProductPrice</h4>
+

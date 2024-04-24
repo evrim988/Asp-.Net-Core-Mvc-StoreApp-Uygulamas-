@@ -1,0 +1,17 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "_ProductCard";
+}
+
+<div class="col-sm-12 col-md-4 my-3">
+    <div class="card" style="width: 18rem;">
+        <img src="images/m1.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h4 class="card-title">@Model.ProductName</h4>
+            <p class="card-text">@Model.ProductDescription</p>
+            <h6 class="card-text">@Model.ProductPrice.ToString("c")</h6>
+            @* <a asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-primary">Ürün Detayı</a> *@
+        </div>
+    </div>
+</div>
+

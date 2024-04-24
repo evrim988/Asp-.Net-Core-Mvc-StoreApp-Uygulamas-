@@ -1,0 +1,19 @@
+﻿@model IQueryable<Product>
+
+@{
+    Layout = "_Layout";
+}
+
+@section Footer {
+    Only For Index Footer
+}
+
+<div class="row my-3">
+    @foreach (var item in Model.ToList())
+    {
+
+        <partial name="_ProductCard" model="@item" />
+
+
+    }
+</div>
