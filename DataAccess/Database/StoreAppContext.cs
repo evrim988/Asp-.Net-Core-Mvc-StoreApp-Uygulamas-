@@ -16,6 +16,8 @@ namespace DataAccess.Database
         }
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,6 +32,30 @@ namespace DataAccess.Database
                     LastModifiedOn = DateTime.Now,
                     IsActive = true,
                     IsDeleted = false,
+                    CategoryID = 1
+                },
+                new Product()
+                {
+                     Id = 2,
+                     ProductName = "Mac",
+                     ProductDescription = "Apple Macbook Air M2",
+                     ProductPrice = 32000,
+                     CreatedOn = DateTime.Now,
+                     LastModifiedOn = DateTime.Now,
+                     IsActive = true,
+                     IsDeleted = false,
+                     CategoryID = 1
+                });
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category()
+                {
+                    Id = 1,
+                    CategoryName = "Notebook",
+                    CreatedOn = DateTime.Now,
+                    LastModifiedOn = DateTime.Now,
+                    IsDeleted = false,
+                    IsActive = true,
                 });
         }
     }

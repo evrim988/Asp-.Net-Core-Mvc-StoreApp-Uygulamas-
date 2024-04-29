@@ -10,5 +10,6 @@ namespace BLL.Abstract
     public interface IProductRepository : IBaseRepository<Product>
     {
         IQueryable<Product> GetList(bool trackChanges);
+        Product GetByIdProduct(int Id,bool trackChanges);
     }
 }

@@ -17,5 +17,10 @@ namespace Entities.Entities
 
         [DisplayName("Ürün Fiyatı")]
         public decimal ProductPrice { get; set; }
+
+        [DisplayName("Kategori")]
+        public int? CategoryID {  get; set; }
+
+        public Category Category { get; set; }
     }
 }

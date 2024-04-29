@@ -4,14 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BLL.Concrete
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : class,new()
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : class,new()
     {
-        private readonly StoreAppContext _context;
+        protected readonly StoreAppContext _context;
 
         public BaseRepository(StoreAppContext context)
         {
@@ -23,6 +24,13 @@ namespace BLL.Concrete
             return trackChanges
                 ? _context.Set<T>()
                 : _context.Set<T>().AsNoTracking();
+        }
+
+        public T FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
+        {
+            return trackChanges
+                ? _context.Set<T>().Where(expression).FirstOrDefault()
+                : _context.Set<T>().Where(expression).AsNoTracking().FirstOrDefault();
         }
     }
 }

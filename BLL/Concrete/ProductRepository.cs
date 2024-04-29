@@ -11,13 +11,15 @@ namespace BLL.Concrete
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        private readonly StoreAppContext _context;
         public ProductRepository(StoreAppContext context) : base(context)
         {
-            context = _context;
         }
 
         public IQueryable<Product> GetList(bool trackChanges) => FindAll(trackChanges);
-       
+
+        public Product GetByIdProduct(int Id, bool trackChanges)
+        {
+            return FindByCondition(p => p.Id == Id, trackChanges);
+        }
     }
 }

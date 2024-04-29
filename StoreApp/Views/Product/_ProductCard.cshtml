@@ -10,7 +10,7 @@
             <h4 class="card-title">@Model.ProductName</h4>
             <p class="card-text">@Model.ProductDescription</p>
             <h6 class="card-text">@Model.ProductPrice.ToString("c")</h6>
-            @* <a asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-primary">Ürün Detayı</a> *@
+            <a asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-primary">Ürün Detayı</a>
         </div>
     </div>
 </div>

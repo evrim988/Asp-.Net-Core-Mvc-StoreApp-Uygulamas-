@@ -20,7 +20,8 @@ namespace StoreApp.Controllers
 
         public IActionResult GetProducts(int Id)
         {
-            throw new NotImplementedException();
+            var model = _unitOfWork.ProductRepository.GetByIdProduct(Id, false);
+            return View(model);
         }
 
     }

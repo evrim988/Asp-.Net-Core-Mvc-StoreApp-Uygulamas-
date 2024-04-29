@@ -23,6 +23,12 @@ namespace BLL.Concrete
             get => _productRepository ?? (_productRepository = new ProductRepository(_context));
         }
 
+        private ICategoryRepository _categoryRepository;
+        public ICategoryRepository CategoryRepository
+        {
+            get => _categoryRepository ?? (_categoryRepository = new CategoryRepository(_context));
+        }
+
         public void Save()
         {
             _context.SaveChanges();
