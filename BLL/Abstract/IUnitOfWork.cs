@@ -12,7 +12,7 @@ namespace BLL.Abstract
 
         ICategoryRepository CategoryRepository { get; }
 
-
         void Save();
+
     }
 }

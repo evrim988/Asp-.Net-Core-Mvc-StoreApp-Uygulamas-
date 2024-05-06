@@ -1,19 +1,18 @@
-﻿using BLL.Abstract;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
 
-namespace StoreApp.Controllers
+namespace StoreApp.Components
 {
-    public class CategoryController : Controller
+    public class CategoriesMenuViewComponent : ViewComponent
     {
         private readonly IServiceManager _manager;
 
-        public CategoryController(IServiceManager manager)
+        public CategoriesMenuViewComponent(IServiceManager manager)
         {
             _manager = manager;
         }
 
-        public IActionResult Index()
+        public IViewComponentResult Invoke()
         {
             var model = _manager.CategoryService.GetListCategories(false);
             return View(model);

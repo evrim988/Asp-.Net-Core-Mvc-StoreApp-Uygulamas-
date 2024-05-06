@@ -21,5 +21,9 @@ namespace BLL.Concrete
         {
             return FindByCondition(p => p.Id == Id, trackChanges);
         }
+
+        public void CreateProduct(Product model) => Create(model);
+
+        public void DeleteProduct(Product model) => Delete(model);
     }
 }

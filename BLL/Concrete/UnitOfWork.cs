@@ -18,7 +18,7 @@ namespace BLL.Concrete
         }
 
         private IProductRepository _productRepository;
-        public IProductRepository ProductRepository 
+        public IProductRepository ProductRepository
         {
             get => _productRepository ?? (_productRepository = new ProductRepository(_context));
         }
@@ -33,5 +33,6 @@ namespace BLL.Concrete
         {
             _context.SaveChanges();
         }
+
     }
 }

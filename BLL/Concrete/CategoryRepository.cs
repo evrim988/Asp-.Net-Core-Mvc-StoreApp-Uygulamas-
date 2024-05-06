@@ -15,5 +15,12 @@ public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
     }
 
+    public void CreateCategory(Category model) => Create(model);
 
+    public void DeleteCategory(Category model) => Delete(model);
+
+    public Category GetByIdCategory(int Id, bool trackChanges)
+    {
+        return FindByCondition(f => f.Id == Id, trackChanges);
+    }
 }

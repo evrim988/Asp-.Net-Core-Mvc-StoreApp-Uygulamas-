@@ -1,0 +1,39 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Yeni Kategori Ekle";
+}
+
+
+<div class="text-center">
+    <div class="display-6" style="font-weight:bolder;">Yeni Kategori Ekle</div>
+    <br />
+    <br />
+    <form method="post" asp-action="Create">
+
+
+        <div class="form-group col-md-6">
+            <label for="ProductName" style="position:absolute; left:250px; font-weight:bold;">Kategori Adı:</label>
+            <div class="input-group">
+                <input asp-for="CategoryName" class="form-control" style="left:300px;" id="CategoryName" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-6">
+            <label for="ProductDescription" style="position:absolute; left:250px; font-weight:bold;">Kategori Açıklaması:</label>
+            <div class="input-group">
+                <input asp-for="CategoryDescription" class="form-control" style="left:300px;" id="CategoryDescription" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-9">
+            <div class="btn-group justify-content-end" style="position:absolute; right:450px;">
+                <button class="btn btn-success" type="submit">Kaydet</button>
+                <a asp-action="Index" class="btn btn-outline-primary">Geri Dön</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+

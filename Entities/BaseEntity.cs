@@ -16,6 +16,8 @@ namespace Entities
 
         [DisplayName("Güncellenme Tarihi")]
         public DateTime LastModifiedOn { get; set; }
+        [DisplayName("Silinme Tarihi")]
+        public DateTime? DeletedOn { get; set; }
 
         [DisplayName("Silinme Durumu")]
         public bool IsDeleted { get; set; }

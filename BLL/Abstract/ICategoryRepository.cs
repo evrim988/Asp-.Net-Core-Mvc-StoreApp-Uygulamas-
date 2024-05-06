@@ -9,5 +9,7 @@ namespace BLL.Abstract;
 
 public interface ICategoryRepository : IBaseRepository<Category>
 {
-
+    void CreateCategory(Category model);
+    void DeleteCategory(Category model);
+    Category GetByIdCategory(int Id,bool trackChanges);
 }

@@ -2,25 +2,26 @@
 using DataAccess.Database;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Services.Abstract;
 
 namespace StoreApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        public ProductController(IUnitOfWork unitOfWork)
+        private readonly IServiceManager _manager;
+        public ProductController(IServiceManager manager)
         {
-            _unitOfWork = unitOfWork;
+            _manager = manager;
         }
         public IActionResult Index()
         {
-            var model = _unitOfWork.ProductRepository.GetList(false); //değişiklikleri izleyip izlemediğini sorguluyor.
+            var model = _manager.ProductService.GetAllProducts(false); //değişiklikleri izleyip izlemediğini sorguluyor.
             return View(model);
         }
 
-        public IActionResult GetProducts(int Id)
+        public IActionResult GetProducts([FromRoute(Name = "id")]int Id)
         {
-            var model = _unitOfWork.ProductRepository.GetByIdProduct(Id, false);
+            var model = _manager.ProductService.GetProductById(Id, false);
             return View(model);
         }
 

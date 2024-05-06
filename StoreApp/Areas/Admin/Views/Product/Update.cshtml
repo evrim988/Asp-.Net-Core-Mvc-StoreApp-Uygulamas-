@@ -1,0 +1,46 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Ürün Güncelle";
+}
+
+<div class="text-center">
+    <div class="display-6" style="font-weight:bolder;">Yeni Ürün Ekle</div>
+    <br />
+    <br />
+    <form method="post" asp-action="Update">
+
+        <div class="text-danger" asp-validation-summary="All"></div>
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group col-md-6">
+            <label for="ProductName" style="position:absolute; left:250px; font-weight:bold;">Ürün Adı:</label>
+            <div class="input-group">
+                <input asp-for="ProductName" class="form-control" style="left:300px;" id="ProductName" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-6">
+            <label for="ProductDescription" style="position:absolute; left:250px; font-weight:bold;">Ürün Açıklaması:</label>
+            <div class="input-group">
+                <input asp-for="ProductDescription" class="form-control" style="left:300px;" id="ProductDescription" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-6">
+            <label for="ProductPrice" style="position:absolute; left:250px; font-weight:bold;">Ürün Fiyatı:</label>
+            <div class="input-group">
+                <input asp-for="ProductPrice" class="form-control" style="left:300px;" id="ProductPrice" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-9">
+            <div class="btn-group justify-content-end" style="position:absolute; right:450px;">
+                <button class="btn btn-success" type="submit">Kaydet</button>
+                <a asp-action="Index" class="btn btn-outline-primary">Geri Dön</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>

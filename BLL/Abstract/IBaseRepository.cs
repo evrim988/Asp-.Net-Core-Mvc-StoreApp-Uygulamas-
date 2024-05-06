@@ -11,5 +11,7 @@ namespace BLL.Abstract
     {
         IQueryable<T> FindAll(bool trackChanges);
         T FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges); //idsine göre getir gibi benzeri bir method
+        void Create(T entity);
+        void Delete(T entity);
     }
 }

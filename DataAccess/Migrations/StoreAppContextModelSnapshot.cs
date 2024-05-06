@@ -43,6 +43,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -57,17 +60,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Notebook",
-                            CreatedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9835),
-                            IsActive = true,
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9836)
-                        });
                 });
 
             modelBuilder.Entity("Entities.Entities.Product", b =>
@@ -82,6 +74,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -108,32 +103,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryID = 1,
-                            CreatedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9645),
-                            IsActive = true,
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9658),
-                            ProductDescription = "Apple Macbook Air M1",
-                            ProductName = "Mac",
-                            ProductPrice = 28000m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryID = 1,
-                            CreatedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9662),
-                            IsActive = true,
-                            IsDeleted = false,
-                            LastModifiedOn = new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9663),
-                            ProductDescription = "Apple Macbook Air M2",
-                            ProductName = "Mac",
-                            ProductPrice = 32000m
-                        });
                 });
 
             modelBuilder.Entity("Entities.Entities.Category", b =>

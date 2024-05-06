@@ -3,8 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -24,6 +22,7 @@ namespace DataAccess.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -49,6 +48,7 @@ namespace DataAccess.Migrations
                     CategoryID = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -60,20 +60,6 @@ namespace DataAccess.Migrations
                         column: x => x.CategoryID,
                         principalTable: "Categories",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "CategoryDescription", "CategoryId", "CategoryName", "CreatedOn", "IsActive", "IsDeleted", "LastModifiedOn" },
-                values: new object[] { 1, null, null, "Notebook", new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9835), true, false, new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9836) });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CategoryID", "CreatedOn", "IsActive", "IsDeleted", "LastModifiedOn", "ProductDescription", "ProductName", "ProductPrice" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9645), true, false, new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9658), "Apple Macbook Air M1", "Mac", 28000m },
-                    { 2, 1, new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9662), true, false, new DateTime(2024, 4, 27, 19, 11, 47, 396, DateTimeKind.Local).AddTicks(9663), "Apple Macbook Air M2", "Mac", 32000m }
                 });
 
             migrationBuilder.CreateIndex(

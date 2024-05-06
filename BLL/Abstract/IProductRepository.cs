@@ -11,5 +11,9 @@ namespace BLL.Abstract
     {
         IQueryable<Product> GetList(bool trackChanges);
         Product GetByIdProduct(int Id,bool trackChanges);
+        void CreateProduct(Product model);
+        void DeleteProduct(Product model);
+
     }
+
 }
