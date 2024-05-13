@@ -5,12 +5,20 @@
     Layout = "_Layout";
 }
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h3 class="text-center">@Model.ProductDescription</h3>
+            <img class="img-fluid shadow rounded-3" style="width:500px; height:500px;" src="@Model.ImageUrl" />
+            <p class="lead text-danger">@Model.ProductPrice.ToString("c")</p>
+
+        </div>
+    </div>
+</div>
+
 <div class="btn-group">
     <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Ana Sayfaya Dön</a>
     <a class="btn btn-outline-info" asp-action="Index" asp-controller="Product">Ürün Sayfasına Geri Dön</a>
 </div>
 
-<h5>@Model.ProductName</h5>
-<p>@Model.ProductDescription</p>
-<h4>@Model.ProductPrice</h4>
 

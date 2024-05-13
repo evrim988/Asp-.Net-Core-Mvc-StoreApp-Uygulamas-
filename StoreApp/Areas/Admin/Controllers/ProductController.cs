@@ -1,5 +1,7 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Product;
+using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Abstract;
 
 namespace StoreApp.Areas.Admin.Controllers
@@ -12,6 +14,12 @@ namespace StoreApp.Areas.Admin.Controllers
         {
             _manager = manager;
         }
+
+        public SelectList GetCategoriesSelectList()
+        {
+            return new SelectList(_manager.CategoryService.GetListCategories(false), "Id", "CategoryName", "1");
+        }
+
         public IActionResult Index()
         {
             var model = _manager.ProductService.GetAllProducts(false);
@@ -19,15 +27,23 @@ namespace StoreApp.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.Categories = GetCategoriesSelectList();
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Product model)
+        public async Task<IActionResult> Create(ProductDTO model ,IFormFile File)
         {
             if(ModelState.IsValid)
             {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", File.FileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await File.CopyToAsync(stream);
+                }
+                model.ImageUrl = String.Concat("/images/", File.FileName);
                 _manager.ProductService.CreateProduct(model);
                 return RedirectToAction("Index");
             }
@@ -36,16 +52,24 @@ namespace StoreApp.Areas.Admin.Controllers
 
         public IActionResult Update(int Id)
         {
-            var model = _manager.ProductService.GetProductById(Id, false);
+            ViewBag.Categories = GetCategoriesSelectList();
+            var model = _manager.ProductService.UpdateProductById(Id, false);
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(Product model)
+        public async Task<IActionResult> Update(UpdateProductDTO model, IFormFile File)
         {
             if(ModelState.IsValid)
             {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", File.FileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await File.CopyToAsync(stream);
+                }
+                model.ImageUrl = String.Concat("/images/", File.FileName);
                 _manager.ProductService.UpdateProduct(model);
                 return RedirectToAction("Index");
             }

@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th>Ürün No</th>
+                <th>Ürün Resmi</th>
                 <th>Ürün Adı</th>
                 <th>Ürün Açıklaması</th>
                 <th>Ürün Fiyatı</th>
@@ -29,6 +30,9 @@
             {
                 <tr>
                     <td>@item.Id</td>
+                    <td>
+                        <img src="@item.ImageUrl" style="width:50px;" />
+                    </td>
                     <td>@item.ProductName</td>
                     <td>@item.ProductDescription</td>
                     <td>@item.ProductPrice.ToString("c")</td>
@@ -40,6 +44,9 @@
                                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" >
                                <i class="fa fa-trash"></i>
                                 Sil</a>
+                           @*  <a class="btn btn-info" asp-action="GetProducts" asp-route-id="@item.Id">
+                                <i class="fa fa-search"></i>
+                                İncele</a> *@
                         </div>
                     </td>
                 </tr>

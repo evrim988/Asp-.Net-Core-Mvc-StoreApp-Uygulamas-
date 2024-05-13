@@ -1,0 +1,53 @@
+﻿@page
+@model CartModel
+@{
+     ViewData["Title"] = "Sepetim";
+}
+
+<div>
+    <br />
+    <div class="text-center display-6">
+        Sepetim
+    </div>
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Ürün Miktarı</th>
+                <th>Ürün Fiyatı</th>
+                <th>Toplam Tutar</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Card?.Lines ?? Enumerable.Empty<CartLine>()) //Card nesneni newlendiğinde line nesnesin dön eğer boş ise bana boş bir cartline nesnesi dön.
+            {
+                <tr>
+                    <td>@item.Product.ProductDescription</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Product.ProductPrice.ToString("c")</td>
+                    <td>@((item.Product.ProductPrice * item.Quantity).ToString("c2"))</td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="Id" value="@item.Product.Id" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Toplam: </td>
+                <td class="text-right text-danger">
+                    @Model.Card.TotalValue().ToString("c2")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

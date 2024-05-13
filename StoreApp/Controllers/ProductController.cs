@@ -19,7 +19,7 @@ namespace StoreApp.Controllers
             return View(model);
         }
 
-        public IActionResult GetProducts([FromRoute(Name = "id")]int Id)
+        public IActionResult GetProducts([FromRoute(Name = "Id")]int Id)
         {
             var model = _manager.ProductService.GetProductById(Id, false);
             return View(model);

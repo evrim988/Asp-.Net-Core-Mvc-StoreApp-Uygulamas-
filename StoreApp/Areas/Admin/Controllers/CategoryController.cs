@@ -1,4 +1,5 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Category;
+using Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
 
@@ -27,9 +28,8 @@ namespace StoreApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category model)
+        public IActionResult Create(CategoryDTO model)
         {
-
             _manager.CategoryService.CreateCategory(model);
             return RedirectToAction("Index");
 
@@ -37,7 +37,7 @@ namespace StoreApp.Areas.Admin.Controllers
 
         public IActionResult Update(int Id)
         {
-            var model = _manager.CategoryService.GetByIdCategory(Id, false);
+            var model = _manager.CategoryService.UpdateCategoryById(Id, false);
             return View(model);
         }
 

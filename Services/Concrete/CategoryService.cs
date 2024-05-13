@@ -1,5 +1,7 @@
-﻿using BLL.Abstract;
+﻿using AutoMapper;
+using BLL.Abstract;
 using DataAccess.Database;
+using Entities.Dtos.Category;
 using Entities.Entities;
 using Services.Abstract;
 using System;
@@ -14,14 +16,18 @@ namespace Services.Concrete
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        private readonly IMapper _mapper;
+
+        public CategoryService(IUnitOfWork unitOfWork,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public void CreateCategory(Category model)
+        public void CreateCategory(CategoryDTO model)
         {
-            _unitOfWork.CategoryRepository.Create(model);
+            var category = _mapper.Map<Category>(model);
+            _unitOfWork.CategoryRepository.Create(category);
             _unitOfWork.Save();
         }
 
@@ -57,6 +63,13 @@ namespace Services.Concrete
             models.CategoryDescription = model.CategoryDescription;
             models.LastModifiedOn = DateTime.Now;
             _unitOfWork.Save();
+        }
+
+        public UpdateCategoryDTO UpdateCategoryById(int id, bool trackChanges)
+        {
+            var model = _unitOfWork.CategoryRepository.GetByIdCategory(id, trackChanges);
+            var productDto = _mapper.Map<UpdateCategoryDTO>(model);
+            return productDto;
         }
     }
 }

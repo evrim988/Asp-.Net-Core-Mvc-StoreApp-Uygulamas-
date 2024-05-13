@@ -1,4 +1,5 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Category;
+using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace Services.Abstract
     {
         IEnumerable<Category> GetListCategories(bool trackChanges);
         Category GetByIdCategory(int id,bool trackChanges);
-        void CreateCategory(Category model);
+        UpdateCategoryDTO UpdateCategoryById(int id, bool trackChanges);
+        void CreateCategory(CategoryDTO model);
         void UpdateCategory(Category model);
         void DeleteCategory(int id);
     }

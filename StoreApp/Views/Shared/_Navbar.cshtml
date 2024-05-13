@@ -1,15 +1,20 @@
 ﻿
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">StoreApp</a>
+        <a class="navbar-brand text-white" href="#">StoreApp</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="collapse navbar-collapse  justify-content-between" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Home"></i>Ana Sayfa</a>
-                <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Product">Ürünler(@await Component.InvokeAsync("ProductSummary"))</a>
-                <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Category">Kategoriler</a>
+                <a class="nav-link active text-white" aria-current="page" asp-action="Index" asp-controller="Home"></i>Ana Sayfa</a>
+                <a class="nav-link active text-white" aria-current="page" asp-action="Index" asp-controller="Product">Ürünler(@await Component.InvokeAsync("ProductSummary"))</a>
+                <a class="nav-link active text-white" aria-current="page" asp-action="Index" asp-controller="Category">Kategoriler</a>
+                <a class="nav-link active text-white" aria-current="page" asp-page="/Contact">İletişim</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link active text-white" aria-current="page" asp-area="" asp-page="/Cart">Sepetim</a>
+                <a class="nav-link active text-white" aria-current="page" asp-area="Admin" asp-action="Index" asp-controller="Dashboard">Admin Paneli</a>
             </div>
         </div>
     </div>

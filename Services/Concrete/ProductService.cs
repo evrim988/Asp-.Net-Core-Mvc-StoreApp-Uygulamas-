@@ -1,4 +1,6 @@
-﻿using BLL.Abstract;
+﻿using AutoMapper;
+using BLL.Abstract;
+using Entities.Dtos.Product;
 using Entities.Entities;
 using Services.Abstract;
 using System;
@@ -12,15 +14,18 @@ namespace Services.Concrete
     public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public void CreateProduct(Product model)
+        public void CreateProduct(ProductDTO model)
         {
-            _unitOfWork.ProductRepository.CreateProduct(model);
+            var product = _mapper.Map<Product>(model);
+            _unitOfWork.ProductRepository.CreateProduct(product);
             _unitOfWork.Save();
         }
 
@@ -35,7 +40,7 @@ namespace Services.Concrete
         }
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
         {
-            return _unitOfWork.ProductRepository.GetList(trackChanges).Where(s=> s.IsActive == true && s.IsDeleted == false);
+            return _unitOfWork.ProductRepository.GetList(trackChanges).Where(s => s.IsActive == true && s.IsDeleted == false);
         }
 
         public Product GetProductById(int Id, bool trackChanges)
@@ -46,14 +51,22 @@ namespace Services.Concrete
             return model;
         }
 
-        public void UpdateProduct(Product model)
+        public void UpdateProduct(UpdateProductDTO model)
         {
             var models = _unitOfWork.ProductRepository.GetByIdProduct(model.Id, true);
             models.ProductName = model.ProductName;
             models.ProductDescription = model.ProductDescription;
             models.ProductPrice = model.ProductPrice;
+            models.CategoryID = model.CategoryId;
             models.LastModifiedOn = DateTime.Now;
             _unitOfWork.Save();
+        }
+
+        public UpdateProductDTO UpdateProductById(int Id, bool trackChanges)
+        {
+            var product = _unitOfWork.ProductRepository.GetByIdProduct(Id, trackChanges);
+            var productDTO = _mapper.Map<UpdateProductDTO>(product);
+            return productDTO;
         }
     }
 }

@@ -5,12 +5,24 @@
 
 <div class="col-sm-12 col-md-4 my-3">
     <div class="card" style="width: 18rem;">
-        <img src="images/m1.webp" class="card-img-top" alt="...">
+        <img src="@Model.ImageUrl" style="height:200px;" class="card-img-top" alt="...">
         <div class="card-body">
             <h4 class="card-title">@Model.ProductName</h4>
             <p class="card-text">@Model.ProductDescription</p>
             <h6 class="card-text">@Model.ProductPrice.ToString("c")</h6>
-            <a asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-primary">Ürün Detayı</a>
+
+            <form id="@Model.Id" asp-page="/cart" method="post">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" name="returnUrl" value="/Product/GetProducts/@Model.Id" />
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fa fa-cart-plus"></i>
+                Sepete Ekle</button>
+
+            </form>
+
+            <a asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" class="btn btn-primary">
+                <i class="fa-solid fa-arrow-right"></i>
+                Detay</a>
         </div>
     </div>
 </div>

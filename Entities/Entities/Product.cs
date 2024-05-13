@@ -17,6 +17,11 @@ namespace Entities.Entities
         [DisplayName("Ürün Açıklaması")]
         public string? ProductDescription { get; set; }
 
+        public string? Summary {  get; set; }
+
+        [DisplayName("Ürün Resmi")]
+        public string? ImageUrl {  get; set; }
+
         [DisplayName("Ürün Fiyatı")]
         [Required(ErrorMessage = "Ürün Fiyatı Boş Geçilemez")]
         public decimal ProductPrice { get; set; }

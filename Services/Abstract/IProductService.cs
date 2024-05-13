@@ -1,4 +1,5 @@
-﻿using Entities.Entities;
+﻿using Entities.Dtos.Product;
+using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace Services.Abstract
     {
         IEnumerable<Product> GetAllProducts(bool trackChanges);
         Product GetProductById(int Id,bool trackChanges);
-        void CreateProduct(Product model);
-        void UpdateProduct(Product model);
+        UpdateProductDTO UpdateProductById(int Id, bool trackChanges);
+        void CreateProduct(ProductDTO model);
+        void UpdateProduct(UpdateProductDTO model);
         void DeleteProduct(int Id);
     }
 }
