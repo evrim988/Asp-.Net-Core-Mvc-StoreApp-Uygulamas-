@@ -1,0 +1,52 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Sipariş Tamamla";
+}
+<div class="text-danger" asp-asp-validation-summary="All"></div>
+<form method="post" asp-action="Index" >
+    
+    <div class="form-group my-3">
+        <label asp-for="OrderName">Adınız ve Soyadınız:</label>
+        <input class="form-control" asp-for="OrderName" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="Country">Ülke:</label>
+        <input class="form-control" asp-for="Country" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="City">Şehir:</label>
+        <input class="form-control" asp-for="City" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="District">İlçe:</label>
+        <input class="form-control" asp-for="District" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="AddressDescription">Adres Açıklaması:</label>
+        <input class="form-control" asp-for="AddressDescription" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="PhoneNumber">Telefon Numarası:</label>
+        <input class="form-control" type="tel" asp-for="PhoneNumber" />
+    </div>
+
+    <div class="form-group my-3">
+        <label asp-for="OrderDescription">Sipariş Notu:</label>
+        <input class="form-control" asp-for="OrderDescription" />
+    </div>
+
+    <div class="form-group my-3">
+        <input asp-for="GiftWrap" />
+        <label>Hediye Paketi Yapılsın</label>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Siparişi Tamamla</button>
+    </div>
+</form>
+

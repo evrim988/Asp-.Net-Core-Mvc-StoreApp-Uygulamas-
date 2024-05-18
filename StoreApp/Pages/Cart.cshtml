@@ -45,9 +45,15 @@
             <tr>
                 <td colspan="3" class="text-right">Toplam: </td>
                 <td class="text-right text-danger">
-                    @Model.Card.TotalValue().ToString("c2")
+                    @Model?.Card?.TotalValue().ToString("c2")
                 </td>
             </tr>
         </tfoot>
     </table>
+    <div class="text-center my-3">
+        <div class="btn-group">
+            <a class="btn btn-primary" href="@Model?.ReturnUrl">Alışverişe Devam Et</a>
+            <a class="btn btn-success mx-2" asp-action="Index" asp-controller="Order">Siparişi Tamamla</a>
+        </div>
+    </div>
 </div>

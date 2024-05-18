@@ -1,0 +1,16 @@
+﻿@page
+@model StoreApp.Pages.LoginModel
+@{
+}
+
+<div class="my-5 text-center">
+    <div class="display-6">Merhaba @Model.FullName </div>
+    <br />
+    <form method="post" asp-page="/Register" >
+        <div class="form-group">
+            <input class="form-control" name="name" placeholder="Adınızı Giriniz..." />
+            <br />
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </div>
+    </form>
+</div>

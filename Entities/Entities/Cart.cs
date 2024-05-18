@@ -15,7 +15,7 @@ namespace Entities.Entities
             Lines = new List<CartLine>();
         }
 
-        public void AddItem(Product model, int quantity)
+        public virtual void AddItem(Product model, int quantity)
         {
             var lines = Lines.Where(s => s.ProductId == model.Id).FirstOrDefault();
 
@@ -25,7 +25,10 @@ namespace Entities.Entities
                 {
                     Product = model,
                     ProductId = model.Id,
-                    Quantity = quantity
+                    Quantity = quantity,
+                    CreatedOn = DateTime.Now,
+                    IsDeleted = false,
+                    IsActive = true
                 });
             }
             else
@@ -34,10 +37,10 @@ namespace Entities.Entities
             }
         }
 
-        public void RemoveLine(Product model) => Lines.RemoveAll(s => s.Product.Id == model.Id);
+        public virtual void RemoveLine(Product model) => Lines.RemoveAll(s => s.Product.Id == model.Id);
 
         public decimal TotalValue() => Lines.Sum(s => s.Product.ProductPrice *  s.Quantity);
 
-        public void Clear() => Lines.Clear();
+        public virtual void Clear() => Lines.Clear();
     }
 }

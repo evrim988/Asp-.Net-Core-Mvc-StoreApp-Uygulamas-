@@ -12,6 +12,8 @@ namespace BLL.Abstract
 
         ICategoryRepository CategoryRepository { get; }
 
+        IOrderRepository OrderRepository {  get; }
+
         void Save();
 
     }

@@ -29,6 +29,12 @@ namespace BLL.Concrete
             get => _categoryRepository ?? (_categoryRepository = new CategoryRepository(_context));
         }
 
+        private IOrderRepository _orderRepository;
+        public IOrderRepository OrderRepository
+        {
+            get => _orderRepository ?? (_orderRepository = new OrderRepository(_context));
+        }
+
         public void Save()
         {
             _context.SaveChanges();

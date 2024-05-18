@@ -13,7 +13,9 @@
                 <a class="nav-link active text-white" aria-current="page" asp-page="/Contact">İletişim</a>
             </div>
             <div class="navbar-nav">
-                <a class="nav-link active text-white" aria-current="page" asp-area="" asp-page="/Cart">Sepetim</a>
+                <a class="nav-link active text-white" aria-current="page" asp-area="" asp-page="/Cart">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Sepetim (@await Component.InvokeAsync("CartSummary")) </a>
                 <a class="nav-link active text-white" aria-current="page" asp-area="Admin" asp-action="Index" asp-controller="Dashboard">Admin Paneli</a>
             </div>
         </div>
