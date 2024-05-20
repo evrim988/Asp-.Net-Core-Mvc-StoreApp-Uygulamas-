@@ -2,6 +2,7 @@
 using BLL.Abstract;
 using Entities.Dtos.Product;
 using Entities.Entities;
+using Entities.RequestParameters;
 using Services.Abstract;
 using System;
 using System.Collections.Generic;
@@ -43,11 +44,22 @@ namespace Services.Concrete
             return _unitOfWork.ProductRepository.GetList(trackChanges).Where(s => s.IsActive == true && s.IsDeleted == false);
         }
 
+        public IEnumerable<Product> GetListWithDetails(ProductRequestParameters model)
+        {
+           return _unitOfWork.ProductRepository.GetListWithDetails(model);
+        }
+
         public Product GetProductById(int Id, bool trackChanges)
         {
             var model = _unitOfWork.ProductRepository.GetByIdProduct(Id, trackChanges);
             if (model == null)
                 throw new Exception("Kayıt Bulunamadı");
+            return model;
+        }
+
+        public IEnumerable<Product> GetShowCaseProducts(bool trackChanges)
+        {
+            var model = _unitOfWork.ProductRepository.GetShowCaseProducts(trackChanges);
             return model;
         }
 

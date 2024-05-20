@@ -1,6 +1,9 @@
 ﻿using BLL.Abstract;
+using BLL.Extensions;
 using DataAccess.Database;
 using Entities.Entities;
+using Entities.RequestParameters;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +28,19 @@ namespace BLL.Concrete
         public void CreateProduct(Product model) => Create(model);
 
         public void DeleteProduct(Product model) => Delete(model);
+
+        public IQueryable<Product> GetShowCaseProducts(bool trackChanges)
+        {
+            return FindAll(trackChanges).Where(s => s.ShowCase == true);
+        }
+
+        public IQueryable<Product> GetListWithDetails(ProductRequestParameters model)
+        {
+            return _context
+                .Products
+                .FilteredByCategoryId(model.Id)
+                .FilteredBySearchTerm(model.SearchTerm)
+                .FilteredByPrice(model.MinPrice, model.MaxPrice, model.IsValidPrice);
+        }
     }
 }

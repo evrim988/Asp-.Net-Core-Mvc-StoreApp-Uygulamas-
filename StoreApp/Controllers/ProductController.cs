@@ -1,6 +1,7 @@
 ﻿using BLL.Abstract;
 using DataAccess.Database;
 using Entities;
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
 
@@ -13,9 +14,9 @@ namespace StoreApp.Controllers
         {
             _manager = manager;
         }
-        public IActionResult Index()
+        public IActionResult Index(ProductRequestParameters parameters)
         {
-            var model = _manager.ProductService.GetAllProducts(false); //değişiklikleri izleyip izlemediğini sorguluyor.
+            var model = _manager.ProductService.GetListWithDetails(parameters); 
             return View(model);
         }
 

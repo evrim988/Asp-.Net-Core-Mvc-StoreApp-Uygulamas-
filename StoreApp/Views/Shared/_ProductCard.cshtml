@@ -1,0 +1,51 @@
+﻿@using StoreApp.Infastructure.Extensions
+@model Product
+@{
+    ViewData["Title"] = "_ProductCard";
+}
+<style>
+    a.btn, button.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+<div class="col-sm-12 col-md-4 my-3">
+    <div class="card" style="width: 18rem;">
+
+        <div class="card-header text-center">
+            @Model.ProductName
+        </div>
+
+        <img src="@Model.ImageUrl" style="height:200px;" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="card-text">
+                <div class="text-danger text-center lead p-2 rounded-2">
+                    <strong> @Model.ProductPrice.ToString("c2")</strong>
+                </div>
+            </div>
+            <p class="card-text">@Model.ProductDescription</p>
+            <div class="d-flex justify-content-center">
+                <div class="btn-group">
+                    <form asp-action="GetProducts" asp-controller="Product" asp-route-id="@Model.Id" method="get">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                    <form id="@Model.Id" asp-page="/cart" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                        <button type="submit" class="btn btn-outline-secondary mx-1">
+                            <i class="fa fa-cart-plus"></i>
+                        </button>
+                    </form>
+                </div>
+            
+            </div>
+          
+
+          
+        </div>
+    </div>
+</div>
+

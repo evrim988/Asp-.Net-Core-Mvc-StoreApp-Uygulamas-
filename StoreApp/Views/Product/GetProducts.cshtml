@@ -22,9 +22,10 @@
         <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Ana Sayfaya Dön</a>
         <form id="@Model.Id" asp-page="/cart" method="post">
             <input type="hidden" asp-for="Id" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <button type="submit" class="btn btn-outline-primary">
-                <i class="fa fa-cart-plus">Sepete Ekle</i>
+                <i class="fa fa-cart-plus"></i>
+                Sepete Ekle
             </button>
         </form>
         <a class="btn btn-outline-info" asp-action="Index" asp-controller="Product">Ürün Sayfasına Geri Dön</a>

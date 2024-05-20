@@ -26,6 +26,9 @@ namespace Entities.Entities
         [Required(ErrorMessage = "Ürün Fiyatı Boş Geçilemez")]
         public decimal ProductPrice { get; set; }
 
+        [DisplayName("Vitrine Eklensin Mi?")]
+        public bool? ShowCase { get; set; }
+
         public int? CategoryID {  get; set; }
         public Category? Category { get; set; }
     }
