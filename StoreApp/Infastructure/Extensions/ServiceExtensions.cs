@@ -15,7 +15,7 @@ public static class ServiceExtensions
     {
         services.AddDbContext<StoreAppContext>(opt =>
         {
-            opt.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
+            opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")); //program.cs de kullanmamız yerine extensionların içine yazmak daha dğru bi kod yapısı olur. Bu method sqlserver configurasyonunu sağlar.
         });
     }
 
@@ -26,19 +26,19 @@ public static class ServiceExtensions
         {
             options.Cookie.Name = "StoreApp.Session";
             options.IdleTimeout = TimeSpan.FromMinutes(10);
-        });
+        });                 //session configurasyonlarını yapmamızı sağlar.
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        services.AddScoped<Cart>(c => SessionCart.GetCart(c));
+        services.AddScoped<Cart>(c => SessionCart.GetCart(c)); //sepetim kısmını session ile kullanılması için enjekte etmiş olduk.
     }
 
     public static void ConfigureRepositoryRegistration(this IServiceCollection services)
     {
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();   //repositoryleri servise enjekte etmiş olduk.
     }
 
     public static void ConfigureServiceRegistration(this IServiceCollection services)
     {
-        services.AddScoped<IServiceManager, ServiceManager>();
+        services.AddScoped<IServiceManager, ServiceManager>();      //servisleri buraya enjekte etmiş olduk.
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IOrderService, OrderService>(); 
@@ -46,7 +46,7 @@ public static class ServiceExtensions
 
     public static void ConfigureRouting(this IServiceCollection services)
     {
-        services.AddRouting(options =>
+        services.AddRouting(options =>      //url de bulunan string ifadelerin hepsini küçük yazar.
         {
             options.LowercaseUrls = true;
         });

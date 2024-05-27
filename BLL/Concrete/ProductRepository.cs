@@ -40,7 +40,8 @@ namespace BLL.Concrete
                 .Products
                 .FilteredByCategoryId(model.Id)
                 .FilteredBySearchTerm(model.SearchTerm)
-                .FilteredByPrice(model.MinPrice, model.MaxPrice, model.IsValidPrice);
+                .FilteredByPrice(model.MinPrice, model.MaxPrice, model.IsValidPrice)
+                .ToPaginate(model.PageNumber, model.PageSize);
         }
     }
 }

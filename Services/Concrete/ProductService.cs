@@ -44,6 +44,11 @@ namespace Services.Concrete
             return _unitOfWork.ProductRepository.GetList(trackChanges).Where(s => s.IsActive == true && s.IsDeleted == false);
         }
 
+        public IEnumerable<Product> GetLastestProducts(int n, bool trackChanges)
+        {
+            return _unitOfWork.ProductRepository.FindAll(trackChanges).OrderByDescending(o => o.Id).Take(n);
+        }
+
         public IEnumerable<Product> GetListWithDetails(ProductRequestParameters model)
         {
            return _unitOfWork.ProductRepository.GetListWithDetails(model);
