@@ -1,0 +1,44 @@
+﻿@model IEnumerable<IdentityUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <br />
+    <div class="display-6">Kullanıcılar</div>
+    <br />
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Kulanıcı Adı</th>
+            <th>Kullanıcı Rolleri</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.UserName</td>
+                <td user-name="@item.UserName" user-role="" ></td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn btn-warning rounded" asp-action="Update" asp-route-id="@item.UserName">Güncelle</a>
+                        <a class="btn btn btn-info rounded" asp-action="ResetPassword" asp-route-id="@item.UserName">Parola Sıfırla</a>
+                        <form method="post" asp-action="DeleteUser">
+                            <input type="hidden" name="UserName" value="@item.UserName" />
+                            <button type="submit" class="btn btn-danger rounded">
+                                <i class="fa fa-solid fa-trash"></i>
+                                Sil
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <br />
+    <div class="display-6">Roller</div>
+    <br />
+</div>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">@item.Name</li>
+    }
+</ul>

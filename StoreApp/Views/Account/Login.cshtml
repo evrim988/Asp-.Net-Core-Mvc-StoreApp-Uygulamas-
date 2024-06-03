@@ -1,0 +1,119 @@
+﻿@using StoreApp.Models
+@model LoginModel
+@{
+    Layout = null;
+}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem; /* Font size büyütüldü */
+    }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://wallpapers.com/images/hd/anonymous-hacker-with-programming-codes-nm4l9azckpyc5qak.webp') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1; /* Arka planda kalmasını sağla */
+        }
+
+    .login-container {
+        background: #fff;
+        padding: 40px; /* Padding artırıldı */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Gölge artırıldı */
+        width: 100%;
+        max-width: 500px; /* Maksimum genişlik artırıldı */
+        opacity: 0.8;
+    }
+
+    .login-title {
+        font-size: 28px; /* Font size büyütüldü */
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .login-subtitle {
+        font-size: 18px;
+        font-style: italic;
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    .form-control {
+        margin-bottom: 20px; /* Margin artırıldı */
+        height: calc(2.0em + 0.75rem + 2px); /* Input yüksekliği artırıldı */
+        font-size: 0.8rem; /* Input font size büyütüldü */
+    }
+
+    .form-label {
+        margin-bottom: 5px;
+        display: block;
+        text-align: left; /* Sol hizalama sağlandı */
+        font-size: 18px;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .btn-login {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        font-size: 1.1rem; /* Button font size büyütüldü */
+        padding: 10px 20px; /* Button padding artırıldı */
+    }
+
+        .btn-login:hover {
+            background: #0056b3;
+        }
+
+    .register-message {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #333;
+    }
+
+        .register-message a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .register-message a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div class="login-container">
+    <div class="text-center">
+        <div class="login-title">StoreApp</div>
+        <div class="login-subtitle">"Apple Teknolojisine Dair Her Şey"</div>
+        <form method="post" asp-action="Login">
+            <input type="hidden" asp-for="RetunUrl" />
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="form-label">Kullanıcı adı:</label>
+                <input asp-for="Name" class="form-control" placeholder="Username" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">Parola:</label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+            </div>
+            <button type="submit" class="btn btn-login btn-block">Giriş Yap</button>
+        </form>
+        <div class="register-message">
+            Kayıtlı Bir Hesabınız Yok İse <a asp-action="Register" asp-controller="Account">Buradan Kayıt </a>Olabilirsiniz.
+        </div>
+    </div>
+</div>

@@ -2,6 +2,8 @@
 using BLL.Concrete;
 using DataAccess.Database;
 using Entities.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services.Abstract;
 using Services.Concrete;
@@ -16,7 +18,22 @@ public static class ServiceExtensions
         services.AddDbContext<StoreAppContext>(opt =>
         {
             opt.UseSqlServer(configuration.GetConnectionString("SqlConnection")); //program.cs de kullanmamız yerine extensionların içine yazmak daha dğru bi kod yapısı olur. Bu method sqlserver configurasyonunu sağlar.
+
+            opt.EnableSensitiveDataLogging(true); //hassas verileri loglama işlemini yapar.
         });
+    }
+
+    public static void ConfigureIdentity(this IServiceCollection services)
+    {
+        services.AddIdentity<IdentityUser, IdentityRole>(opt =>     //ıdentity için servis kaydımızı yapmış olduk.
+        {
+            opt.SignIn.RequireConfirmedAccount = false; //kişi emailini onaylayıp onaylamadığını kontrol eder. True olduğunda.
+            opt.User.RequireUniqueEmail = true; //kişinin email adresi gerekli olsun mu ? bunu kontrol eder. True olduğunda.
+            opt.Password.RequireUppercase = false;   //kişinin parolası büyük harf içersin mi? bunu kontrol eder.
+            opt.Password.RequireLowercase = false; //kişi parola luştururken küçük harf içersin mi? bunu kontrol eder.
+            opt.Password.RequireDigit = false; //kişi parola oluştururken rakam içersin mi? bunu kontrol eder.
+            opt.Password.RequiredLength = 6; //kişinin parolası 6 karakterden fazla olmasın.
+        }).AddEntityFrameworkStores<StoreAppContext>();
     }
 
     public static void ConfigureSession(this IServiceCollection services)
@@ -42,6 +59,18 @@ public static class ServiceExtensions
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IOrderService, OrderService>(); 
+        services.AddScoped<IAuthService, AuthService>();
+    }
+
+    public static void ConfigureAplicationCookie(this IServiceCollection services)
+    {
+        services.ConfigureApplicationCookie(opt =>
+        {
+            opt.LoginPath = new PathString("/Account/Login");
+            opt.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            opt.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+            opt.AccessDeniedPath = new PathString("/Account/AccessDenied");
+        });
     }
 
     public static void ConfigureRouting(this IServiceCollection services)

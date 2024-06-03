@@ -1,0 +1,9 @@
+﻿@if(User.Identity.IsAuthenticated)
+{
+    <a class="nav-link active text-white" aria-current="page" asp-area="" asp-action="LogOut" asp-controller="Account">Çıkış Yap</a>
+   
+}
+else
+{
+    <a class="nav-link active text-white" aria-current="page" asp-area="" asp-action="Login" asp-controller="Account">Giriş Yap</a>
+}

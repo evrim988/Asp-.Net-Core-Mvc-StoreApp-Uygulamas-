@@ -1,4 +1,5 @@
 ﻿using Entities.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
 
@@ -15,6 +16,7 @@ namespace StoreApp.Controllers
             _cart = cart;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
