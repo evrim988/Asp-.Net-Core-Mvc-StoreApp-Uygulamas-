@@ -11,6 +11,8 @@ using StoreApp.Infastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(Presentation.AssemblyReferance).Assembly);
 builder.Services.AddRazorPages();
 
 builder.Services.ConfigureDbContext(builder.Configuration);
@@ -44,7 +46,9 @@ app.UseEndpoints(endpoints =>
 
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{Id?}");
 
-    endpoints.MapRazorPages();  
+    endpoints.MapRazorPages();
+
+    endpoints.MapControllers();
 });
 
 
