@@ -9,6 +9,7 @@ namespace StoreApp.Areas.Admin.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
+            TempData["info"] = "Hoşgeldiniz :)";
             return View();
         }
     }

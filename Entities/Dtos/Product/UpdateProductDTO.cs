@@ -17,5 +17,7 @@ namespace Entities.Dtos.Product
         public decimal ProductPrice { get; set; }
 
         public int CategoryId { get; set; }
+
+        public bool ShowCase {  get; set; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using Entities.Dtos.Product;
 using Entities.Entities;
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Abstract;
+using StoreApp.Models;
 
 namespace StoreApp.Areas.Admin.Controllers
 {
@@ -22,10 +24,20 @@ namespace StoreApp.Areas.Admin.Controllers
             return new SelectList(_manager.CategoryService.GetListCategories(false), "Id", "CategoryName", "1");
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]ProductRequestParameters parameters)
         {
-            var model = _manager.ProductService.GetAllProducts(false);
-            return View(model);
+            var products = _manager.ProductService.GetListWithDetails(parameters);
+            var pagination = new Pagination()
+            {
+                CurrentPage = parameters.PageNumber,
+                ItemsPerPages = parameters.PageSize,
+                TotalItems = _manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
         public IActionResult Create()
         {
@@ -47,6 +59,7 @@ namespace StoreApp.Areas.Admin.Controllers
                 }
                 model.ImageUrl = String.Concat("/images/", File.FileName);
                 _manager.ProductService.CreateProduct(model);
+                TempData["success"] = $"{model.ProductName} Başarılı Bir Şekilde Eklenmiştir.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -73,6 +86,7 @@ namespace StoreApp.Areas.Admin.Controllers
                 }
                 model.ImageUrl = String.Concat("/images/", File.FileName);
                 _manager.ProductService.UpdateProduct(model);
+                TempData["success"] = $"{model.ProductName} Başarılı Bir Şekilde Güncellenmiştir.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -81,6 +95,8 @@ namespace StoreApp.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             _manager.ProductService.DeleteProduct(id);
+            TempData["success"] =  "Ürün Başarılı Bir Şekilde Silinmiştir.";
+
             return RedirectToAction("Index");
         }
     }

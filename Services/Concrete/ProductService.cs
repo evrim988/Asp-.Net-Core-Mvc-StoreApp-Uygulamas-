@@ -75,6 +75,7 @@ namespace Services.Concrete
             models.ProductDescription = model.ProductDescription;
             models.ProductPrice = model.ProductPrice;
             models.CategoryID = model.CategoryId;
+            models.ShowCase = model.ShowCase;
             models.LastModifiedOn = DateTime.Now;
             _unitOfWork.Save();
         }

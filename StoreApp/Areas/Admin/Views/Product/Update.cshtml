@@ -43,6 +43,12 @@
                 <input asp-for="ProductPrice" class="form-control" style="left:300px;" id="ProductPrice" />
             </div>
         </div>
+        <div class="form-group col-md-6">
+            <div class="form-check form-switch">
+                <label asp-for="ShowCase" class="form-check-label" style="position:absolute; left:250px; font-weight:bold;" for="flexSwitchCheckDefault">Ürün Vitrine Eklensin Mi?</label>
+                <input asp-for="ShowCase" class="form-check-input" style="position:absolute;left:550px;" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            </div>
+        </div>
 
         <div>
             <img src="@Model.ImageUrl" style="width:200px;" />
